@@ -16,24 +16,24 @@ const MAIN_IMAGES = [mainm, mainm2, mainf];
 
 const REVEAL_CONTENT = [
   {
-    upper: ["name moneybagg", "age:23"],
-    lower: "major: computer science",
+    upper: ["name: rayan atif", "age: 22", "location: islamabad, pakistan"],
+    lower: "major: computer science @ lums",
   },
   {
     upper: [
-      "Cleopatra lived closer to the Moon landing than to the building of the pyramids.",
-      "Vikings kept cats on ships for pest control (and vibes).",
-      "In medieval Europe, animals could be put on trial for crimes",
+      "Gold Medal in Regional Basketball.",
+      "100% Merit Scholarship holder for O/A Levels.",
+      "Passionate about Linux customization and open source contribution.",
     ],
-    lower: "abbove is some history fun fact",
+    lower: "also writes urdu poetry on the side",
   },
   {
     upper: [
-      "Oxford University founding is older than the Aztec Empire.",
-      "The shortest war in history lasted 38–45 minutes (Britain vs Zanzibar).",
-      "Humans have been writing for ~5,000 years",
+      "Fine-tuned ASR models for Urdu/English code-switching dialects.",
+      "Published a GNOME Shell Extension to the official marketplace.",
+      "Built a full-stack EV charging platform as a senior project.",
     ],
-    lower: "yes it's a place holder",
+    lower: "yes, all of this is actually true",
   },
 ];
 

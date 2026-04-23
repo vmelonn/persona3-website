@@ -2,73 +2,54 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS = [
-  { id: "i", badge: "I", title: "EDUCATION", subtitle: "LUMS / BSc Computer Science", rank: 3 },
-  { id: "ii", badge: "II", title: "SKILLS", subtitle: "Python / ML / Full Stack / Linux", rank: 4 },
-  { id: "iii", badge: "III", title: "PROJECTS", subtitle: "PakPlug / Artistreet / GNOME", rank: 5 },
-  { id: "iv", badge: "IV", title: "EXPERIENCE", subtitle: "wAI / AI Engineer", rank: 2 },
+  { id: "i",   badge: "01", title: "PAKPLUG",        subtitle: "Flutter / Node.js / MongoDB",      type: "MOBILE",    rank: 1 },
+  { id: "ii",  badge: "02", title: "ARTISTREET",     subtitle: "Django / PostgreSQL / WebSockets", type: "WEB APP",   rank: 2 },
+  { id: "iii", badge: "03", title: "NGROK INDICATOR",subtitle: "GNOME Shell Extension",            type: "LINUX EXT", rank: 3 },
+  { id: "iv",  badge: "04", title: "DYNAMIC PANEL",  subtitle: "GNOME Shell Extension",            type: "LINUX EXT", rank: 4 },
 ];
 
-const PANELS = [
+const PROJECT_DETAIL = [
   {
-    index: "01", label: "EDUCATION LOG", progress: "2026",
+    index: "01", title: "PAKPLUG", status: "ACTIVE", period: "Sept 2025 – Present",
     rows: [
-      { index: "01", title: "BSc Computer Science — LUMS", status: "In Progress" },
-      { index: "02", title: "Computer Vision", status: "Complete" },
-      { index: "03", title: "Software Engineering", status: "Complete" },
-      { index: "04", title: "Generative AI", status: "Complete" },
+      { index: "01", title: "Full-stack EV charging platform — Flutter (Riverpod, Clean Architecture) + Node.js/Express + MongoDB", status: "—" },
+      { index: "02", title: "JWT auth, RBAC, rate limiting, audit logging, and paginated REST APIs", status: "—" },
+      { index: "03", title: "Real-time booking management, admin dashboards, driver-to-host messaging", status: "—" },
+      { index: "04", title: "Deployed to production on Vercel", status: "—" },
     ],
-    bullets: [
-      "- Sept 2022 – May 2026 | Lahore University of Management Sciences",
-      "- Courses: Computer Vision, Software Engineering, Generative AI",
-      "- 100% Merit Scholarship holder (O/A Levels)",
-    ],
+    stack: ["Flutter", "Riverpod", "Node.js", "MongoDB", "Vercel"],
   },
   {
-    index: "02", label: "SKILLS LOG", progress: "TECH",
+    index: "02", title: "ARTISTREET", status: "ACTIVE", period: "Feb 2025 – Present",
     rows: [
-      { index: "01", title: "Python", status: "Expert" },
-      { index: "02", title: "JavaScript", status: "Expert" },
-      { index: "03", title: "Django (REST, Channels)", status: "Expert" },
-      { index: "04", title: "PostgreSQL / MongoDB", status: "Proficient" },
-      { index: "05", title: "YOLOv8 / NLP / RAG", status: "Proficient" },
-      { index: "06", title: "Linux / Git / Docker", status: "Proficient" },
+      { index: "01", title: "Digital marketplace backend with scalable user and content management", status: "—" },
+      { index: "02", title: "JazzCash / Easypaisa multi-gateway payment integration", status: "—" },
+      { index: "03", title: "Real-time communication via Django Channels (WebSockets)", status: "—" },
+      { index: "04", title: "CI/CD deployment on Railway with Selenium testing", status: "—" },
     ],
-    bullets: [
-      "- Flutter (Riverpod, Clean Architecture)",
-      "- Node.js / Express",
-      "- LangGraph · Whisper ASR · TensorRT / ONNX",
-    ],
+    stack: ["Django", "PostgreSQL", "Channels", "JazzCash", "Railway"],
   },
   {
-    index: "03", label: "PROJECTS LOG", progress: "4",
+    index: "03", title: "NGROK INDICATOR", status: "PUBLISHED", period: "Jan 2026 – Present",
     rows: [
-      { index: "01", title: "PakPlug — Flutter + Node.js EV charging platform", status: "Active" },
-      { index: "02", title: "Artistreet — Django digital marketplace", status: "Active" },
-      { index: "03", title: "Ngrok Indicator — GNOME Shell Extension", status: "Published" },
-      { index: "04", title: "Dynamic Panel Transparency — GNOME Shell Extension", status: "Published" },
+      { index: "01", title: "Real-time Ngrok API integration for tunnel management from the GNOME top bar", status: "—" },
+      { index: "02", title: "Automates URL retrieval and tunnel status without leaving the desktop", status: "—" },
+      { index: "03", title: "Privacy-centric localhost-only architecture for GNOME 46", status: "—" },
     ],
-    bullets: [
-      "- Senior Project: full-stack mobile app deployed on Vercel",
-      "- 2 extensions published to the official GNOME marketplace",
-      "- Co-founder & lead dev on Artistreet marketplace",
-    ],
+    stack: ["JavaScript", "GJS", "GNOME 46", "Ngrok API"],
   },
   {
-    index: "04", label: "EXPERIENCE LOG", progress: "2+yr",
+    index: "04", title: "DYNAMIC PANEL", status: "PUBLISHED", period: "June 2025 – Present",
     rows: [
-      { index: "01", title: "wAI — AI Engineer (Jan 2026 – Present)", status: "Active" },
-      { index: "02", title: "wAI — Junior ML Intern (Jul–Dec 2025)", status: "Done" },
-      { index: "03", title: "Artistreet — Co-Founder & Full-Stack Dev (Feb 2025 –)", status: "Active" },
+      { index: "01", title: "Logic-based transparency engine that automatically toggles panel opacity", status: "—" },
+      { index: "02", title: "Solves UI inconsistencies across different desktop states", status: "—" },
+      { index: "03", title: "Published to the official GNOME Extensions marketplace", status: "—" },
     ],
-    bullets: [
-      "- LangGraph multi-agent orchestration · RAG pipelines · Whisper ASR fine-tuning",
-      "- YOLOv8 CCTV pipeline: 40% → 80% mAP · TensorRT/ONNX edge deployment",
-      "- JazzCash/Easypaisa payments · Django Channels · CI/CD on Railway",
-    ],
+    stack: ["JavaScript", "GJS", "GNOME"],
   },
 ];
 
-export default function ResumePage({ src }) {
+export default function SideProjects({ src }) {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -80,15 +61,16 @@ export default function ResumePage({ src }) {
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === "ArrowUp") setActive((i) => Math.max(0, i - 1));
+      if (e.key === "ArrowUp")   setActive((i) => Math.max(0, i - 1));
       if (e.key === "ArrowDown") setActive((i) => Math.min(ITEMS.length - 1, i + 1));
       if (e.key === "ArrowLeft") navigate(-1);
       if (e.key === "Escape" || e.key === "Backspace") navigate(-1);
     };
-
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [navigate]);
+
+  const detail = PROJECT_DETAIL[active];
 
   return (
     <div id="menu-screen">
@@ -230,7 +212,7 @@ export default function ResumePage({ src }) {
 
         .resume-title {
           font-family: 'Anton', sans-serif;
-          font-size: 56px;
+          font-size: 46px;
           line-height: 0.9;
           letter-spacing: 1px;
           color: #a5f6ff;
@@ -249,14 +231,14 @@ export default function ResumePage({ src }) {
         }
         .resume-rank-label {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px;
+          font-size: 22px;
           letter-spacing: 2px;
           color: #9ffbff;
           transition: color 0.22s ease;
         }
         .resume-rank-number {
           font-family: 'Anton', sans-serif;
-          font-size: 70px;
+          font-size: 60px;
           line-height: 0.82;
           color: #9ffbff;
           transition: color 0.22s ease;
@@ -285,7 +267,7 @@ export default function ResumePage({ src }) {
 
         .resume-subtitle {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px;
+          font-size: 24px;
           line-height: 1;
           letter-spacing: 1px;
           color: #041238;
@@ -339,13 +321,13 @@ export default function ResumePage({ src }) {
         }
         .resume-detail-top-title {
           font-family: 'Anton', sans-serif;
-          font-size: 42px;
+          font-size: 36px;
           line-height: 0.92;
           letter-spacing: 1px;
         }
         .resume-detail-top-progress {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: 42px;
+          font-size: 28px;
           letter-spacing: 2px;
           line-height: 1;
         }
@@ -380,18 +362,18 @@ export default function ResumePage({ src }) {
         }
         .resume-detail-row-title {
           font-family: 'Anton', sans-serif;
-          font-size: 28px;
-          line-height: 1;
+          font-size: 20px;
+          line-height: 1.2;
           color: #f2fcff;
         }
         .resume-detail-status {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: 22px;
+          font-size: 18px;
           line-height: 1;
           letter-spacing: 1.1px;
           color: #06133b;
           background: #8df6ff;
-          padding: 7px 12px;
+          padding: 5px 10px;
           clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
         }
         .resume-detail-bottom {
@@ -416,27 +398,22 @@ export default function ResumePage({ src }) {
         }
         .resume-detail-bullet {
           font-family: 'Anton', sans-serif;
-          font-size: 21px;
+          font-size: 19px;
           line-height: 1.15;
           color: #edfaff;
         }
-
       `}</style>
 
       <div className="resume-overlay">
         <div className="resume-stack">
-          <div className={`resume-list-tag${mounted ? " mounted" : ""}`}>LIST</div>
+          <div className={`resume-list-tag${mounted ? " mounted" : ""}`}>PROJECTS</div>
           {ITEMS.map((item, index) => (
             <div
               key={item.id}
               className={`resume-card-wrap${active === index ? " active" : ""}${mounted ? " mounted" : ""}`}
               style={{ transitionDelay: `${index * 55}ms` }}
-              onMouseEnter={() => {
-                setActive(index);
-              }}
-              onClick={() => {
-                setActive(index);
-              }}
+              onMouseEnter={() => setActive(index)}
+              onClick={() => setActive(index)}
             >
               <div className="resume-card">
                 <div className="resume-badge">
@@ -445,8 +422,7 @@ export default function ResumePage({ src }) {
                 <div className="resume-card-inner">
                   <div className="resume-title">{item.title}</div>
                   <div className="resume-rank">
-                    <div className="resume-rank-label">RANK</div>
-                    <div className="resume-rank-number">{item.rank}</div>
+                    <div className="resume-rank-label">{item.type}</div>
                   </div>
                 </div>
                 <div className="resume-subtitle-bar">
@@ -459,31 +435,29 @@ export default function ResumePage({ src }) {
 
         <div className="resume-detail-panel">
           <div className="resume-detail-top">
-            <div className="resume-detail-top-index">{PANELS[active].index}</div>
-            <div className="resume-detail-top-title">{PANELS[active].label}</div>
-            <div className="resume-detail-top-progress">{PANELS[active].progress}</div>
+            <div className="resume-detail-top-index">{detail.index}</div>
+            <div className="resume-detail-top-title">{detail.title}</div>
+            <div className="resume-detail-top-progress">{detail.status}</div>
           </div>
 
           <div className="resume-detail-list">
-            {PANELS[active].rows.map((row) => (
+            {detail.rows.map((row) => (
               <div className="resume-detail-row" key={row.index}>
                 <div className="resume-detail-row-index">{row.index}</div>
                 <div className="resume-detail-row-title">{row.title}</div>
-                <div className="resume-detail-status">{row.status}</div>
               </div>
             ))}
           </div>
 
           <div className="resume-detail-bottom">
-            <div className="resume-detail-bottom-title">DETAILS</div>
+            <div className="resume-detail-bottom-title">STACK</div>
             <div className="resume-detail-bullets">
-              {PANELS[active].bullets.map((b) => (
-                <div className="resume-detail-bullet" key={b}>{b}</div>
+              {detail.stack.map((tag) => (
+                <div className="resume-detail-bullet" key={tag}>— {tag}</div>
               ))}
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
